@@ -115,7 +115,7 @@ export function PianoKeyboard({
       onKeyUp={(event) => handleKeyUp(event, note)}
       onBlur={() => onNoteOff(keyboardVoiceId(note.midi))}
     >
-      <span>{note.name}</span>
+      {!note.isBlack && <span>{note.name}</span>}
     </button>
   );
 
