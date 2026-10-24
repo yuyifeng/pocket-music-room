@@ -8,6 +8,9 @@ interface Voice {
 
 type AudioContextConstructor = new () => AudioContext;
 
+const MASTER_GAIN = 0.82;
+const VOICE_GAIN = 0.78;
+
 function getAudioContextConstructor(): AudioContextConstructor {
   const AudioContextClass =
     window.AudioContext ??
@@ -37,7 +40,7 @@ class PianoSampler {
       const output = context.createGain();
       const compressor = context.createDynamicsCompressor();
 
-      output.gain.value = 0.58;
+      output.gain.value = MASTER_GAIN;
       compressor.threshold.value = -16;
       compressor.knee.value = 16;
       compressor.ratio.value = 4;
@@ -90,7 +93,10 @@ class PianoSampler {
     source.buffer = buffer;
     source.playbackRate.value = mapping.playbackRate;
     gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.72, now + 0.012);
+    gain.gain.exponentialRampToValueAtTime(
+      VOICE_GAIN,
+      now + 0.012,
+    );
     source.connect(gain);
     gain.connect(output);
 
