@@ -13,8 +13,8 @@ interface Voice {
 
 type AudioContextConstructor = new () => AudioContext;
 
-const MASTER_GAIN = 1.15;
-const VOICE_GAIN = 0.95;
+const PREAMP_GAIN = 3.5;
+const VOICE_GAIN = 1;
 const AUDIO_UNLOCK_TIMEOUT_MS = 5000;
 const SAMPLE_LOAD_TIMEOUT_MS = 20000;
 const SAMPLE_RETRY_DELAY_MS = 250;
@@ -79,12 +79,12 @@ class PianoSampler {
       const output = context.createGain();
       const compressor = context.createDynamicsCompressor();
 
-      output.gain.value = MASTER_GAIN;
-      compressor.threshold.value = -3;
-      compressor.knee.value = 3;
-      compressor.ratio.value = 12;
-      compressor.attack.value = 0.002;
-      compressor.release.value = 0.18;
+      output.gain.value = PREAMP_GAIN;
+      compressor.threshold.value = -4;
+      compressor.knee.value = 2;
+      compressor.ratio.value = 20;
+      compressor.attack.value = 0.001;
+      compressor.release.value = 0.15;
       output.connect(compressor);
       compressor.connect(context.destination);
 
