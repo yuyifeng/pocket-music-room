@@ -13,7 +13,7 @@ interface Voice {
 
 type AudioContextConstructor = new () => AudioContext;
 
-const PREAMP_GAIN = 3.5;
+const PREAMP_GAIN = 4.5;
 const VOICE_GAIN = 1;
 const AUDIO_UNLOCK_TIMEOUT_MS = 5000;
 const SAMPLE_LOAD_TIMEOUT_MS = 20000;
